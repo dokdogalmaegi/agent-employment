@@ -1,4 +1,8 @@
 @startyaml
+#highlight "spring" / "dev"
+#highlight "spring" / "dev" / "jpa" / "database"
+#highlight "spring" / "dev" / "jpa" / "hibernate" / "ddl-auto"
+
 port: 8080
 spring:
   dev:
