@@ -1,6 +1,6 @@
 package com.agent.agentemployment.security.session
 
-import com.agent.agentemployment.domain.AgentUser
+import com.agent.agentemployment.domain.model.AgentUser
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails

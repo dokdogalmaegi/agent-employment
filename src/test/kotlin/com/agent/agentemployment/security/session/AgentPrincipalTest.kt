@@ -1,6 +1,6 @@
 package com.agent.agentemployment.security.session
 
-import com.agent.agentemployment.domain.AgentUser
+import com.agent.agentemployment.domain.model.AgentUser
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

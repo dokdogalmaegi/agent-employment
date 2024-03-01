@@ -1,4 +1,4 @@
-package com.agent.agentemployment.domain
+package com.agent.agentemployment.domain.model
 
 import com.agent.agentemployment.domain.enums.UserRole
 import jakarta.persistence.Column
