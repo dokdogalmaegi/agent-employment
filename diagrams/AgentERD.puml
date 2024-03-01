@@ -25,7 +25,6 @@ entity "AgentUser" as agentUser {
   + roleList
   The user has a role list
 }
-'role <-right- agentUser::roleList
 role }|- agentUser::roleList
 
 @enduml
