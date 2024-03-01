@@ -54,7 +54,7 @@ class AgentPrincipalTest {
 
     @Test
     fun isAccountNonExpired() {
-        assertThat(agentAdminPrincipal!!.isAccountNonLocked).isTrue()
+        assertThat(agentAdminPrincipal!!.isAccountNonExpired).isTrue()
     }
 
     @Test
@@ -69,6 +69,6 @@ class AgentPrincipalTest {
 
     @Test
     fun isEnabled() {
-        assertThat(true).isTrue()
+        assertThat(agentAdminPrincipal!!.isEnabled).isTrue()
     }
 }
