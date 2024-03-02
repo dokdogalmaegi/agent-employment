@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+enum "Role" as role {
+  ADMIN
+  --
+  USER
+}
+
+entity "AgentUser" as agentUser {
+  Define: End user of the system
+  --
+  + id Long<PK>
+  Primary key
+  --
+  + name String<Unique>
+  ID to use when signing in
+  --
+  + password
+  user's password
+  --
+  + isAdmin: Boolean
+  Whether the admin user
+  --
+  + roleList
+  The user has a role list
+}
+role }|- agentUser::roleList
+
+@enduml

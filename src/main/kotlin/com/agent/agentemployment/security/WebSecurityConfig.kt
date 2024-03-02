@@ -1,5 +1,6 @@
 package com.agent.agentemployment.security
 
+import com.agent.agentemployment.security.session.AgentAuthenticationFilter
 import lombok.RequiredArgsConstructor
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -9,13 +10,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer
 import org.springframework.security.config.http.SessionCreationPolicy
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 @EnableMethodSecurity
-class WebSecurityConfig {
+class WebSecurityConfig(private val tokenProvider: TokenProvider) {
     @Bean
     fun webSecurityCustomizer(): WebSecurityCustomizer {
         return WebSecurityCustomizer {
@@ -34,8 +37,18 @@ class WebSecurityConfig {
             .sessionManagement {
                 it
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            }.addFilterAt(
+                AgentAuthenticationFilter(tokenProvider),
+                UsernamePasswordAuthenticationFilter::class.java
+            ).authorizeHttpRequests {
+                it.requestMatchers("/api/v1/users").permitAll()
+
+                it.requestMatchers("/api/v1/**").authenticated()
             }
 
         return httpSecurity.build()
     }
+
+    @Bean
+    fun bCryptPasswordEncoder(): BCryptPasswordEncoder = BCryptPasswordEncoder()
 }

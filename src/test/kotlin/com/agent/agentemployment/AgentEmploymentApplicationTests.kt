@@ -8,5 +8,6 @@ class AgentEmploymentApplicationTests {
 
     @Test
     fun contextLoads() {
+        main(arrayOf())
     }
 }

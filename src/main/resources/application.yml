@@ -1,3 +1,11 @@
 server:
   port: 8080
 
+token:
+  secret: 64yA7Lap67mE67CA7Yag7YGw7J6F64uI64uk
+  expiration: 1800000
+
+admin-user:
+  name: admin
+  password: testAdmin1234
+  username: admin
