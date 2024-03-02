@@ -23,7 +23,7 @@ class TokenProvider(
     private var expiration: Long = 0L
 
     @PostConstruct
-    private fun init() {
+    fun init() {
         secret = Base64.getEncoder().encodeToString(tokenConfig.secret.toByteArray())
         expiration = tokenConfig.expiration.toLong()
     }
