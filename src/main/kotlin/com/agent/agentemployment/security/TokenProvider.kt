@@ -29,6 +29,7 @@ class TokenProvider(
     }
 
     fun createToken(username: String, roles: List<UserRole>): String {
+        logger.info { "create token username: $username, roles: $roles" }
         val now = Date()
 
         return Jwts.builder()
@@ -48,6 +49,7 @@ class TokenProvider(
                 throw ExpiredJwtException(null, null, "Token has expired")
             }
 
+            logger.info { "Token is valid, user: ${parseSignedClaims.payload.subject}" }
             true
         } catch (expiredToken: ExpiredJwtException) {
             throw expiredToken
