@@ -8,6 +8,9 @@ import io.jsonwebtoken.MalformedJwtException
 import io.jsonwebtoken.security.Keys
 import io.jsonwebtoken.security.SecurityException
 import jakarta.annotation.PostConstruct
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Component
 import java.util.Base64
 import java.util.Date
@@ -16,7 +19,8 @@ private val logger = mu.KotlinLogging.logger {}
 
 @Component
 class TokenProvider(
-    private val tokenConfig: TokenConfig
+    private val tokenConfig: TokenConfig,
+    private val userDetailsService: UserDetailsService
 ) {
 
     private var secret: String = ""
@@ -59,5 +63,12 @@ class TokenProvider(
             logger.error { errorMessage }
             false
         }
+    }
+
+    fun getAuthentication(token: String): Authentication {
+        val parseSignedClaims = Jwts.parser().verifyWith(Keys.hmacShaKeyFor(secret.toByteArray())).build().parseSignedClaims(token)
+
+        val userDetails = userDetailsService.loadUserByUsername(parseSignedClaims.payload.subject)
+        return UsernamePasswordAuthenticationToken(userDetails, "", userDetails.authorities)
     }
 }
