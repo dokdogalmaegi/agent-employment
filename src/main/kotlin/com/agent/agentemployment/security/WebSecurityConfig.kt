@@ -41,7 +41,7 @@ class WebSecurityConfig(private val tokenProvider: TokenProvider) {
                 AgentAuthenticationFilter(tokenProvider),
                 UsernamePasswordAuthenticationFilter::class.java
             ).authorizeHttpRequests {
-                it.requestMatchers("/api/v1/auth").permitAll()
+                it.requestMatchers("/api/v1/users").permitAll()
 
                 it.requestMatchers("/api/v1/**").authenticated()
             }
