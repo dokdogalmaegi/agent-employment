@@ -43,4 +43,13 @@ class TokenProviderTest @Autowired constructor(
             expiredTokenProvider.validateToken(token)
         }
     }
+
+    @Test
+    fun `should not validate token when invalid`() {
+        val invalidToken = "invalid-token"
+
+        val isValid = tokenProvider.validateToken(invalidToken)
+
+        assertThat(isValid).isFalse()
+    }
 }

@@ -55,6 +55,8 @@ class TokenProvider(
                 else -> "Invalid token"
             }
 
+            logger.error { otherException }
+            logger.error { errorMessage }
             false
         }
     }
