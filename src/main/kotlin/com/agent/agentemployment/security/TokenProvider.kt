@@ -45,10 +45,6 @@ class TokenProvider(
         return try {
             val parseSignedClaims = Jwts.parser().verifyWith(Keys.hmacShaKeyFor(secret.toByteArray())).build().parseSignedClaims(token)
 
-            if (parseSignedClaims.payload.expiration.before(Date())) {
-                throw ExpiredJwtException(null, null, "Token has expired")
-            }
-
             logger.info { "Token is valid, user: ${parseSignedClaims.payload.subject}" }
             true
         } catch (expiredToken: ExpiredJwtException) {
