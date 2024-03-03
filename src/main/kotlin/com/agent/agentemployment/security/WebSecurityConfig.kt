@@ -41,7 +41,7 @@ class WebSecurityConfig(private val tokenProvider: TokenProvider) {
                 AgentAuthenticationFilter(tokenProvider),
                 UsernamePasswordAuthenticationFilter::class.java
             ).authorizeHttpRequests {
-                it.requestMatchers("/api/v1/users").permitAll()
+                it.requestMatchers(*PERMIT_ALL_URLS).permitAll()
 
                 it.requestMatchers("/api/v1/**").authenticated()
             }
@@ -51,4 +51,11 @@ class WebSecurityConfig(private val tokenProvider: TokenProvider) {
 
     @Bean
     fun bCryptPasswordEncoder(): BCryptPasswordEncoder = BCryptPasswordEncoder()
+
+    companion object {
+        val PERMIT_ALL_URLS = arrayOf(
+            "/api/v1/users",
+            "/api/v1/auth"
+        )
+    }
 }
