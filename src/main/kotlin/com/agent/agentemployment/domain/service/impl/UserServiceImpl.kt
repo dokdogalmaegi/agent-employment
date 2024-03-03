@@ -3,8 +3,8 @@ package com.agent.agentemployment.domain.service.impl
 import com.agent.agentemployment.domain.model.AgentUser
 import com.agent.agentemployment.domain.persistence.AgentUserRepository
 import com.agent.agentemployment.domain.service.UserService
-import com.agent.agentemployment.dto.UserSignUpDTO
-import com.agent.agentemployment.dto.toAgentUser
+import com.agent.agentemployment.dto.security.UserSignUpDTO
+import com.agent.agentemployment.dto.security.toAgentUser
 import com.agent.agentemployment.security.TokenProvider
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service

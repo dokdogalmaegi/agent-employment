@@ -1,7 +1,9 @@
-package com.agent.agentemployment.dto
+package com.agent.agentemployment.dto.security
 
 import com.agent.agentemployment.domain.enums.UserRole
 import com.agent.agentemployment.domain.model.AgentUser
+import com.agent.agentemployment.dto.security.UserSignUpDTO
+import com.agent.agentemployment.dto.security.toAgentUser
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll

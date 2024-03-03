@@ -1,6 +1,6 @@
 package com.agent.agentemployment.domain.service
 
-import com.agent.agentemployment.dto.UserSignUpDTO
+import com.agent.agentemployment.dto.security.UserSignUpDTO
 
 interface UserService {
 
