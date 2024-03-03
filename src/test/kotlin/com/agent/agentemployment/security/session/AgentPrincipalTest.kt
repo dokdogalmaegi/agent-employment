@@ -16,7 +16,7 @@ class AgentPrincipalTest @Autowired constructor(
     private val adminConfig: AdminConfig
 ) {
 
-    private val agentAdminUser: AgentUser = AgentUser()
+    private val agentAdminUser = AgentUser()
     private var agentAdminPrincipal: AgentPrincipal? = null
 
     @BeforeEach
@@ -36,13 +36,13 @@ class AgentPrincipalTest @Autowired constructor(
 
     @Test
     fun getAuthoritiesNotContainsUser() {
-        val agentUser: AgentUser = AgentUser()
+        val agentUser = AgentUser()
         agentUser.name = "user"
         agentUser.username = "user"
         agentUser.password = "user"
         agentUser.isAdmin = false
 
-        val agentUserPrincipal: AgentPrincipal = AgentPrincipal(agentUser)
+        val agentUserPrincipal = AgentPrincipal(agentUser)
         assertAll(
             { assertThat(agentUserPrincipal.authorities).contains(SimpleGrantedAuthority("ROLE_${UserRole.USER}")) },
             { assertThat(agentUserPrincipal.authorities).doesNotContain(SimpleGrantedAuthority("ROLE_${UserRole.ADMIN}")) }
