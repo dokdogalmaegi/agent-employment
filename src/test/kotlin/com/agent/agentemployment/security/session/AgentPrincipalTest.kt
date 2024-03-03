@@ -1,5 +1,6 @@
 package com.agent.agentemployment.security.session
 
+import com.agent.agentemployment.domain.enums.UserRole
 import com.agent.agentemployment.domain.model.AgentUser
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -24,7 +25,7 @@ class AgentPrincipalTest {
 
     @Test
     fun getAuthorities() {
-        assertThat(agentAdminPrincipal!!.authorities).contains(SimpleGrantedAuthority("ROLE_ADMIN"))
+        assertThat(agentAdminPrincipal!!.authorities).contains(SimpleGrantedAuthority("ROLE_${UserRole.ADMIN}"))
     }
 
     @Test
@@ -37,8 +38,8 @@ class AgentPrincipalTest {
 
         val agentUserPrincipal: AgentPrincipal = AgentPrincipal(agentUser)
         assertAll(
-            { assertThat(agentUserPrincipal.authorities).contains(SimpleGrantedAuthority("ROLE_USER")) },
-            { assertThat(agentUserPrincipal.authorities).doesNotContain(SimpleGrantedAuthority("ROLE_ADMIN")) }
+            { assertThat(agentUserPrincipal.authorities).contains(SimpleGrantedAuthority("ROLE_${UserRole.USER}")) },
+            { assertThat(agentUserPrincipal.authorities).doesNotContain(SimpleGrantedAuthority("ROLE_${UserRole.ADMIN}")) }
         )
     }
 
