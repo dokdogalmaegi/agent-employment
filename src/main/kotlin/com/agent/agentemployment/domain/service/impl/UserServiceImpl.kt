@@ -24,4 +24,8 @@ class UserServiceImpl(
         )
         userRepository.save(cryptoUser.toAgentUser())
     }
+
+    override fun createToken(username: String, password: String): String {
+        TODO("Not yet implemented")
+    }
 }
