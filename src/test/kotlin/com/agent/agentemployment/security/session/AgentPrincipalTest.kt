@@ -1,23 +1,29 @@
 package com.agent.agentemployment.security.session
 
+import com.agent.agentemployment.config.AdminConfig
 import com.agent.agentemployment.domain.enums.UserRole
 import com.agent.agentemployment.domain.model.AgentUser
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 
-class AgentPrincipalTest {
+@SpringBootTest
+class AgentPrincipalTest @Autowired constructor(
+    private val adminConfig: AdminConfig
+) {
 
     private val agentAdminUser: AgentUser = AgentUser()
     private var agentAdminPrincipal: AgentPrincipal? = null
 
     @BeforeEach
     fun setUp() {
-        agentAdminUser.name = "admin"
-        agentAdminUser.username = "admin"
-        agentAdminUser.password = "admin"
+        agentAdminUser.name = adminConfig.name
+        agentAdminUser.username = adminConfig.username
+        agentAdminUser.password = adminConfig.password
         agentAdminUser.isAdmin = true
 
         agentAdminPrincipal = AgentPrincipal(agentAdminUser)
@@ -45,12 +51,12 @@ class AgentPrincipalTest {
 
     @Test
     fun getPassword() {
-        assertThat(agentAdminPrincipal!!.password).isEqualTo("admin")
+        assertThat(agentAdminPrincipal!!.password).isEqualTo(adminConfig.password)
     }
 
     @Test
     fun getUsername() {
-        assertThat(agentAdminPrincipal!!.username).isEqualTo("admin")
+        assertThat(agentAdminPrincipal!!.username).isEqualTo(adminConfig.username)
     }
 
     @Test

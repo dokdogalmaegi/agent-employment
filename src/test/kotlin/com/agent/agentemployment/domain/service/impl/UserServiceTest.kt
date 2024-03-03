@@ -1,5 +1,6 @@
 package com.agent.agentemployment.domain.service.impl
 
+import com.agent.agentemployment.config.AdminConfig
 import com.agent.agentemployment.domain.persistence.AgentUserRepository
 import com.agent.agentemployment.domain.service.UserService
 import com.agent.agentemployment.dto.UserSignUpDTO
@@ -15,7 +16,8 @@ import org.springframework.transaction.annotation.Transactional
 @SpringBootTest
 class UserServiceTest @Autowired constructor(
     private val userService: UserService,
-    private val userRepository: AgentUserRepository
+    private val userRepository: AgentUserRepository,
+    private val adminConfig: AdminConfig
 ) {
 
     @Test
@@ -37,7 +39,7 @@ class UserServiceTest @Autowired constructor(
     fun `should throw exception when signup a user with the same username`() {
         val userSignUpDTO: UserSignUpDTO = UserSignUpDTO(
             "test1",
-            "admin",
+            adminConfig.username,
             "test3"
         )
 
@@ -45,5 +47,14 @@ class UserServiceTest @Autowired constructor(
             userService.createUser(userSignUpDTO)
         }.message
         assertThat(errorMessage).isEqualTo("User already exists")
+    }
+
+    @Test
+    fun `should get access token with the valid user`() {
+        val accessToken = assertDoesNotThrow {
+            userService.createToken(adminConfig.username, adminConfig.password)
+        }
+
+        assertThat(accessToken).isNotEmpty()
     }
 }

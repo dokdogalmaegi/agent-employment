@@ -1,5 +1,6 @@
 package com.agent.agentemployment.security
 
+import com.agent.agentemployment.config.AdminConfig
 import com.agent.agentemployment.config.TokenConfig
 import com.agent.agentemployment.domain.enums.UserRole
 import com.agent.agentemployment.security.session.AgentPrincipal
@@ -20,7 +21,8 @@ val logger = mu.KotlinLogging.logger {}
 class TokenProviderTest @Autowired constructor(
     private val tokenProvider: TokenProvider,
     private val tokenConfig: TokenConfig,
-    private val userDetailsService: UserDetailsService
+    private val userDetailsService: UserDetailsService,
+    private val adminConfig: AdminConfig
 ) {
 
     @Test
@@ -61,14 +63,14 @@ class TokenProviderTest @Autowired constructor(
 
     @Test
     fun `should get Authentication from token`() {
-        val token = tokenProvider.createToken("admin", listOf(UserRole.USER, UserRole.ADMIN))
+        val token = tokenProvider.createToken(adminConfig.username, listOf(UserRole.USER, UserRole.ADMIN))
 
         val authentication: Authentication = tokenProvider.getAuthentication(token)
         assertThat(authentication).isNotNull
 
         val agentPrincipal = authentication.principal as AgentPrincipal
         assertAll(
-            { assertThat(agentPrincipal.username).isEqualTo("admin") },
+            { assertThat(agentPrincipal.username).isEqualTo(adminConfig.username) },
             { assertThat(agentPrincipal.authorities).contains(SimpleGrantedAuthority("ROLE_${UserRole.USER}")) }
         )
     }
