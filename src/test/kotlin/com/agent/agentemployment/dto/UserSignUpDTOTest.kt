@@ -28,6 +28,7 @@ class UserSignUpDTOTest {
         val agentUser: AgentUser = userSignUpDTO.toAgentUser()
         assertAll(
             { assertThat(agentUser).isNotNull },
+            { assertThat(agentUser.id).isEqualTo(0) },
             { assertThat(agentUser.name).isEqualTo("test1") },
             { assertThat(agentUser.username).isEqualTo("test2") },
             { assertThat(agentUser.password).isEqualTo("test3") },
