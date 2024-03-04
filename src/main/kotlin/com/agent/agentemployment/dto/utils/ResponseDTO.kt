@@ -13,7 +13,7 @@ data class ResponseDTO (
         fun success(code: Int = HttpStatus.OK.value(), message: String = HttpStatus.OK.reasonPhrase, data: Any?): ResponseDTO =
             ResponseDTO(code, message, data)
 
-        fun error(code: Int = HttpStatus.BAD_REQUEST.value(), message: String = HttpStatus.BAD_REQUEST.reasonPhrase, data: Any? = null): ResponseDTO =
+        fun fail(code: Int = HttpStatus.BAD_REQUEST.value(), message: String = HttpStatus.BAD_REQUEST.reasonPhrase, data: Any? = null): ResponseDTO =
             ResponseDTO(code, message, data)
     }
 }
