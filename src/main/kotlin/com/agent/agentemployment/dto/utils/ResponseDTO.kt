@@ -3,7 +3,7 @@ package com.agent.agentemployment.dto.utils
 import org.springframework.http.HttpStatus
 import java.time.LocalDateTime
 
-data class ResponseDTO (
+data class ResponseDTO(
     val code: Int,
     val message: String,
     val data: Any?,
