@@ -1,7 +1,8 @@
 package com.agent.agentemployment.controller.v1
 
 import com.agent.agentemployment.domain.service.UserService
-import com.agent.agentemployment.dto.UserSignInDTO
+import com.agent.agentemployment.dto.security.UserSignInDTO
+import com.agent.agentemployment.dto.utils.ResponseDTO
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -15,10 +16,10 @@ class AuthController(
 ) {
 
     @PostMapping
-    fun signIn(@RequestBody userSignInDTO: UserSignInDTO): String {
+    fun signIn(@RequestBody userSignInDTO: UserSignInDTO): ResponseDTO {
         val (username: String, password: String) = userSignInDTO
         val accessToken = userService.createToken(username, password)
 
-        return accessToken
+        return ResponseDTO.success(data = mapOf("accessToken" to accessToken))
     }
 }

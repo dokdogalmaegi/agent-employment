@@ -1,4 +1,4 @@
-package com.agent.agentemployment.dto
+package com.agent.agentemployment.dto.security
 
 import com.agent.agentemployment.domain.enums.UserRole
 import com.agent.agentemployment.domain.model.AgentUser

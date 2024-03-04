@@ -1,7 +1,7 @@
 package com.agent.agentemployment.controller.v1
 
 import com.agent.agentemployment.domain.service.UserService
-import com.agent.agentemployment.dto.UserSignUpDTO
+import com.agent.agentemployment.dto.security.UserSignUpDTO
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.PostMapping

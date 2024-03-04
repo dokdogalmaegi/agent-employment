@@ -55,7 +55,8 @@ class WebSecurityConfig(private val tokenProvider: TokenProvider) {
     companion object {
         val PERMIT_ALL_URLS = arrayOf(
             "/api/v1/users",
-            "/api/v1/auth"
+            "/api/v1/auth",
+            "/api/v1/alive",
         )
     }
 }

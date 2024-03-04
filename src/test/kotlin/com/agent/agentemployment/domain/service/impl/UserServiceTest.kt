@@ -3,7 +3,7 @@ package com.agent.agentemployment.domain.service.impl
 import com.agent.agentemployment.config.AdminConfig
 import com.agent.agentemployment.domain.persistence.AgentUserRepository
 import com.agent.agentemployment.domain.service.UserService
-import com.agent.agentemployment.dto.UserSignUpDTO
+import com.agent.agentemployment.dto.security.UserSignUpDTO
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll

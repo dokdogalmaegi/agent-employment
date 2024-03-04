@@ -1,4 +1,4 @@
-package com.agent.agentemployment.dto
+package com.agent.agentemployment.dto.security
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
